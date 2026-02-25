@@ -10,12 +10,12 @@ public class Produto {
 
     }
 
-    public Produto(String nome, int id, double preco, int qtd) {
+    public Produto(String nome, double preco, int qtd) {
         this.nome = nome;
-        this.id = id;
         this.preco = preco;
         this.qtd = qtd;
     }
+
 
     public String getNome() {
         return nome;

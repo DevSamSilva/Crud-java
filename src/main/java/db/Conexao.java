@@ -1,5 +1,6 @@
 package db;
 
+import exceptions.DbException;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.Connection;
@@ -15,6 +16,16 @@ public class Conexao {
 
     public static Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL,USER,PASSWORD);
+    }
+
+    public static void fecharConexao(Connection conn){
+        if (conn != null){
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new DbException(e.getMessage());
+            }
+        }
     }
 
 }
