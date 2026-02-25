@@ -3,11 +3,9 @@ package db;
 import exceptions.DbException;
 import io.github.cdimascio.dotenv.Dotenv;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class Conexao {
+public class DB {
     private static final Dotenv dotenv = Dotenv.load();
 
     private static final String URL = dotenv.get("DB_URL");
@@ -24,6 +22,26 @@ public class Conexao {
                 conn.close();
             } catch (SQLException e) {
                 throw new DbException(e.getMessage());
+            }
+        }
+    }
+
+    public static void fecharStatement(PreparedStatement stmt){
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException e){
+                throw new DbException("Error: " + e.getMessage());
+        }
+        }
+    }
+
+    public static void fecharResultSet(ResultSet rs){
+        if (rs != null){
+            try {
+                rs.close();
+            } catch (SQLException e){
+                throw new DbException("Error: " + e.getMessage());
             }
         }
     }
