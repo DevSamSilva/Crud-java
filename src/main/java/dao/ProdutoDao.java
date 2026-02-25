@@ -69,7 +69,19 @@ public class ProdutoDao {
             DB.fecharStatement(stmt);
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException(e.getMessage());
+        }
+    }
+
+    public static void deletar(int id){
+        String sql = "DELETE FROM produto WHERE id=?";
+        try(Connection conn = DB.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            System.out.println("Produto deletado com sucesso");
+            DB.fecharStatement(stmt);
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
         }
     }
 

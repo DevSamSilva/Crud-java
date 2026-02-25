@@ -15,9 +15,9 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
 
+        boolean bool = true;
 
-
-        while (true){
+        while (bool){
             System.out.println("===== Sistema Loja =====");
             System.out.println("Escolha uma opção:");
             System.out.println("(1)Inserir produtos.");
@@ -42,7 +42,7 @@ public class App {
                     System.out.println(ProdutoDao.listarProduto()+"\n");
                     break;
                 case 3:
-                    System.out.println("Digite os dados para atualizar:");
+                    System.out.println("Digite os dados para atualizar o produto");
                     System.out.println("Digite o ID do produto: ");
                     int idAtualizdo = sc.nextInt();
                     sc.nextLine();
@@ -57,7 +57,17 @@ public class App {
                     ProdutoDao.atualizar(produto);
                     break;
                 case 4:
-
+                    System.out.println("Digite o ID para exclusão:");
+                    int idExclusao = sc.nextInt();
+                    ProdutoDao.deletar(idExclusao);
+                    break;
+                case 5:
+                    System.out.println("Programa finalizado:");
+                    bool = false;
+                    break;
+                default:
+                    System.out.println("opção inválida");
+                    continue;
             }
         }
 
