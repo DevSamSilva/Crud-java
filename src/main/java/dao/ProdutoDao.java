@@ -54,4 +54,24 @@ public class ProdutoDao {
         }
         return listar;
     }
+
+    public static void atualizar(Produto produto){
+        String sql = "UPDATE produto SET nome=?, preco=?, quantidade=? WHERE id=?";
+
+        try(Connection conn = DB.conectar();PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, produto.getNome());
+            stmt.setDouble(2, produto.getPreco());
+            stmt.setInt(3, produto.getQtd());
+            stmt.setInt(4, produto.getId());
+
+            stmt.executeUpdate();
+            System.out.println("Produto atualizado com sucesso!");
+            DB.fecharStatement(stmt);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

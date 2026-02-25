@@ -40,6 +40,24 @@ public class App {
                     break;
                 case 2:
                     System.out.println(ProdutoDao.listarProduto()+"\n");
+                    break;
+                case 3:
+                    System.out.println("Digite os dados para atualizar:");
+                    System.out.println("Digite o ID do produto: ");
+                    int idAtualizdo = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Digite o nome do produto");
+                    String nomeAtualizado = sc.nextLine();
+                    System.out.println("Digite o preço: ");
+                    double precoAtualizado = sc.nextDouble();
+                    System.out.println("Digite a quantidade:");
+                    int quantidadeAtualizado = sc.nextInt();
+                    Produto produto = new Produto(nomeAtualizado, precoAtualizado, quantidadeAtualizado);
+                    produto.setId(idAtualizdo);
+                    ProdutoDao.atualizar(produto);
+                    break;
+                case 4:
+
             }
         }
 
