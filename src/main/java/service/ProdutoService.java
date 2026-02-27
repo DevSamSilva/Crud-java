@@ -11,19 +11,20 @@ import java.util.Scanner;
 
 public class ProdutoService {
 
-    public ProdutoDao produtoDao = new ProdutoImplements();
+    private ProdutoDao produtoDao = new ProdutoImplements();
+    public Scanner sc = new Scanner(System.in);
 
 
-    public void produtoService(Scanner sc, Produto p) {
+    public void produtoService(Produto p) {
         boolean bool = true;
 
         while (bool) {
-                int opcao = introducao(sc);
+                int opcao = introducao();
 
                 switch (opcao) {
                     case 1:
                         try {
-                            adicionarProduto(p, sc);
+                            adicionarProduto(p);
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
@@ -32,10 +33,10 @@ public class ProdutoService {
                         listarProdutos();
                         break;
                     case 3:
-                        atualizarProduto(p, sc);
+                        atualizarProduto(p);
                         break;
                     case 4:
-                        excluirProduto(sc);
+                        excluirProduto();
                         break;
                     case 5:
                         System.out.println("Programa finalizado:");
@@ -50,7 +51,7 @@ public class ProdutoService {
 
 
 
-    public int introducao(Scanner sc){
+    public int introducao(){
         System.out.println("===== Sistema Loja =====");
         System.out.println("Escolha uma opção:");
         System.out.println("(1)Inserir produtos.");
@@ -63,7 +64,7 @@ public class ProdutoService {
         return opcao;
     }
 
-    public void adicionarProduto(Produto produto, Scanner sc) throws SQLException, SQLException {
+    public void adicionarProduto(Produto produto) throws SQLException, SQLException {
             System.out.println("Digite o nome do produto:");
             String nome = sc.nextLine();
             System.out.println("Digite o preço do produto:");
@@ -85,7 +86,7 @@ public class ProdutoService {
         }
     }
 
-    public void atualizarProduto(Produto produto, Scanner sc){
+    public void atualizarProduto(Produto produto){
         System.out.println("Digite os dados para atualizar o produto");
         System.out.println("Digite o ID do produto: ");
         int idAtualizado = sc.nextInt();
@@ -101,7 +102,7 @@ public class ProdutoService {
         produtoDao.atualizar(produto);
     }
 
-    public  void excluirProduto(Scanner sc){
+    public  void excluirProduto(){
         System.out.println("Digite o ID para exclusão:");
         int idExclusao = sc.nextInt();
         produtoDao.deletar(idExclusao);

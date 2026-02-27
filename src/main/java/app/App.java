@@ -16,7 +16,7 @@ public class App {
         System.out.println("Banco conectado");
 
         ProdutoService produtoService = new ProdutoService();
-        produtoService.produtoService(new Scanner(System.in), new Produto());
+        produtoService.produtoService(new Produto());
     }
 }
 
